@@ -1,0 +1,36 @@
+.survey-logo
+{
+    height: auto;
+    width: 20%;
+    align-content: flex-start;
+}
+
+.Login_graphics
+{
+    height: auto;
+    width: 70%;
+}
+
+.main_box {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: auto;
+    height: auto;
+    width:60%;
+    margin-top: 20ex;
+
+    
+    
+
+  }
+  .form-group
+  {
+      width: 70%;
+      margin: auto;
+  }
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
