@@ -3,6 +3,11 @@ import React from "react";
 import './App.css';
 import LoginPage from "./Login/Login";
 import Homepage from "./Homepage/Homepage";
+import CreateSurvey from "./Client/Create Survey/CreateSurvey";
+import NewSurveyList from"./User/Survey/NewSurveyList";
+import completeSurvey from"./User/Survey/completeSurvey";
+
+
 
 import RegisterPage from "./Register/Register";
 
@@ -19,6 +24,13 @@ function App() {
           <Route path="/login" component={LoginPage} exact />
 
           <Route path="/register" component={RegisterPage} exact />
+
+          <Route path="/createSurvey" component={CreateSurvey} exact />
+          <Route path="/NewSurveyList" component={NewSurveyList} exact />
+          <Route path="/completeSurvey" component={completeSurvey} exact />
+
+
+
 
           
         </Switch>

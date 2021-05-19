@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { MDBInput } from "mdbreact";
-import {Container, Row, Col} from 'react-bootstrap'
+import {Container, Row, Col, Form} from 'react-bootstrap'
 import './Register.css'
+import axios from "axios";
+import { Redirect } from "react-router";
 
 export default class RegisterBox extends Component {
     constructor() {
@@ -13,6 +15,8 @@ export default class RegisterBox extends Component {
           email: "",
           password: "",
           confirm_pass:"",
+          type:"User",
+          redirect: false,
           
 
         };
@@ -26,6 +30,56 @@ export default class RegisterBox extends Component {
         console.log(this.state.email);
         console.log(this.state.password);
         console.log(this.state.confirm_password);
+        console.log(this.state.type);
+
+
+
+        if(this.state.type == "User")
+        {
+            try {
+                const response = await axios.post(
+                  process.env.REACT_APP_BACKEND_URL + "api/users/register", //API Call
+                  
+                  {
+                    firstName: this.state.f_name,
+                    lastName: this.state.l_name,
+                    email: this.state.email,
+                    password: this.state.password
+                  }
+                );
+
+                alert(response.data.message);
+                this.setState({ redirect: true }); //redirect condion for home page
+            }
+            catch
+            {
+               
+            }
+        }
+        if(this.state.type == "Client")
+        {
+            try {
+                const response = await axios.post(
+                  process.env.REACT_APP_BACKEND_URL + "api/clients/register", //API Call
+                 
+                  {
+                    firstName: this.state.f_name,
+                    lastName: this.state.l_name,
+                    email: this.state.email,
+                    password: this.state.password
+                  }
+                );
+
+                alert(response.data.message);
+            }
+            catch
+            {
+                
+            }
+        }
+
+
+
 
 
       };
@@ -43,8 +97,15 @@ export default class RegisterBox extends Component {
 
 
     render() {
+
+        //redirect to homepage after successful login
+        const { redirect } = this.state;
+        //alert(redirect);
+        if (redirect) {
+        return <Redirect to="/login" />;
+        } else
         return (
-            <div className="container" className="center">
+            <div data-aos="fade-left" className="container" className="center">
                 <div className="main_box bg-white shadow">
 
                     <h2 className="center Heading">Sign Up</h2>
@@ -140,6 +201,39 @@ export default class RegisterBox extends Component {
                             }
                             required
                         />
+
+
+                        <Col sm={10} className="center pt-3">
+                            <Form.Check inline
+                            className="pl-5"
+                                type="radio"
+                                label="User"
+                                name="formHorizontalRadios"
+                                id="formHorizontalRadios1"
+                                onChange={(e) =>
+                                    this.setState({
+                                        type: "User",
+                                    })
+                                }
+                                checked
+                                
+                            />
+
+                            <Form.Check inline
+                                className="pl-5"
+                                type="radio"
+                                label="Client"
+                                name="formHorizontalRadios"
+                                id="formHorizontalRadios2"
+                                onChange={(e) =>
+                                    this.setState({
+                                        type: "Client",
+                                    })
+                                }
+                            />
+                            
+                        </Col>
+    
 
 
 
